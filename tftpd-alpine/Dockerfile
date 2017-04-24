@@ -19,4 +19,4 @@ EXPOSE 69/udp
 RUN adduser -D tftpd
 
 ENTRYPOINT ["in.tftpd"]
-CMD ["-4","--foreground","--verbose","--user","tftpd","--secure","/var/tftpboot"]
+CMD ["--foreground","--verbose","--user","tftpd","--secure","/var/tftpboot"]
