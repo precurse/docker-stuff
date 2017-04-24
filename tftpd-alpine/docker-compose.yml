@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  tftp:
+    image: precurse/tftpd-alpine
+    ports:
+      - 69:69/udp
