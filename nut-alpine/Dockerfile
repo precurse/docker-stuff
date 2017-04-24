@@ -1,12 +1,12 @@
-FROM alpine:3.5
+FROM precurse/alpine-armhf
+LABEL maintainer "andrewklaus@gmail.com"
 
 ADD ./v2.7.4.tar.gz /
-#RUN tar xvf /nut.tar.gz
 
 WORKDIR /nut-2.7.4
 
 RUN apk update && \
-    apk add python perl autoconf automake libtool build-base gcc abuild binutils binutils-doc gcc-doc libusb-compat-dev cppunit-dev neon-dev net-snmp-dev asciidoc
+    apk add --no-cache python perl autoconf automake libtool build-base gcc abuild binutils binutils-doc gcc-doc libusb-compat-dev cppunit-dev neon-dev net-snmp-dev asciidoc
 
 RUN adduser -D nut
 
@@ -18,7 +18,6 @@ RUN ./autogen.sh && \
     --disable-static \
     --with-serial \
     --with-usb \
-    --with-doc="" \
     --without-avahi \
     --with-snmp \
     --with-neon \
@@ -28,7 +27,6 @@ RUN ./autogen.sh && \
     --with-libltdl \
     --without-cgi \
     --prefix=/usr \
-    --with-udev-dir=/usr/lib/udev \
     --datadir=/usr/share/ups \
     --sbindir=/usr/bin \
     --sysconfdir=/etc/ups \
@@ -36,18 +34,20 @@ RUN ./autogen.sh && \
     --with-dev
 
 RUN make
-RUN make install && rm -rf /usr/share/man/
-RUN mkdir -p /var/state/ups && chown nut /var/state/ups /etc/ups
+RUN make install && rm -rf /usr/share/man/ /nut-2.7.4
+WORKDIR /
 
-USER nut
+ADD start.sh /start.sh
+RUN chmod +x /start.sh
 
 ADD nut.conf /etc/ups/
 ADD ups.conf /etc/ups/
 ADD upsd.conf /etc/ups/
 ADD upsd.users /etc/ups/
 
+RUN mkdir -p /var/state/ups && \
+    chown nut /var/state/ups /etc/ups
 
 EXPOSE 3493
 
-ENTRYPOINT ["/usr/bin/upsd"]
-CMD ["-D"]
+ENTRYPOINT ["/start.sh"]
