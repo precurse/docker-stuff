@@ -2,13 +2,16 @@ FROM precurse/alpine-armhf
 LABEL maintainer "andrewklaus@gmail.com"
 
 RUN apk update && \
-    apk add nginx=1.12.0-r2 && \
-    adduser -D -u 1000 -g 'www' www
+    apk add --no-cache \
+    nginx=1.12.0-r2 \
+    curl \
+ && adduser -D -u 1000 -g 'www' www \
+ && mkdir -p /www/smartos
 
 ENV release=20170601T212107Z
-RUN curl -s -L https://us-east.manta.joyent.com/Joyent_Dev/public/builds/smartos/release-20170525-20170601T212107Z/smartos//platform-${release}.tgz \
+RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${release}/platform-${release}.tgz \
   | tar -C /www -zxvf - \
- && mv /www/platform*/* /www/
+ && mv /www/platform-${release} /www/platform
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["-c","/nginx.conf"]
