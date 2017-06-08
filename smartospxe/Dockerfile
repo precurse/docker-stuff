@@ -15,5 +15,7 @@ RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${relea
 
 ADD nginx.conf /nginx.conf
 
+EXPOSE 80
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["-c","/nginx.conf"]
