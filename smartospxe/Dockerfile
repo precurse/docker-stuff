@@ -13,5 +13,7 @@ RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${relea
   | tar -C /www -zxvf - \
  && mv /www/platform-${release} /www/platform
 
+ADD nginx.conf /nginx.conf
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["-c","/nginx.conf"]
