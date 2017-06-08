@@ -1,16 +1,33 @@
 FROM precurse/alpine-armhf
 LABEL maintainer "andrewklaus@gmail.com"
 
-ADD ./v2.7.4.tar.gz /
-
-WORKDIR /nut-2.7.4
-
 RUN apk update && \
-    apk add --no-cache python perl autoconf automake libtool build-base gcc abuild binutils binutils-doc gcc-doc libusb-compat-dev cppunit-dev neon-dev net-snmp-dev asciidoc
+    apk add --no-cache \
+    python \
+    perl \
+    autoconf \
+    automake \
+    libtool \
+    build-base \
+    gcc \
+    abuild \
+    binutils \
+    binutils-doc \
+    gcc-doc \
+    libusb-compat-dev \
+    cppunit-dev \
+    neon-dev \
+    net-snmp-dev \
+    asciidoc \
+    curl
 
 RUN adduser -D nut
 
-RUN ./autogen.sh && \
+ENV release=2.7.4
+RUN curl -s -L https://codeload.github.com/networkupstools/nut/tar.gz/v${release} \
+  | tar -C / -zxvf - \
+ && cd /nut-${release} \
+ && ./autogen.sh && \
     ./configure \
     --without-wrap \
     --with-user=nut \
@@ -31,11 +48,27 @@ RUN ./autogen.sh && \
     --sbindir=/usr/bin \
     --sysconfdir=/etc/ups \
     --with-openssl \
-    --with-dev
-
-RUN make
-RUN make install && rm -rf /usr/share/man/ /nut-2.7.4
-WORKDIR /
+    --with-dev \
+ && make \
+ && make install \
+ && cd / \
+ && rm -rf /usr/share/man \
+ && rm -rf /nut-${release} \
+ && apk del \
+    autoconf \
+    automake \
+    libtool \
+    build-base \
+    gcc \
+    abuild \
+    binutils \
+    binutils-doc \
+    gcc-doc \
+    cppunit-dev \
+    neon-dev \
+    net-snmp-dev \
+    asciidoc \
+    curl
 
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
@@ -45,8 +78,9 @@ ADD ups.conf /etc/ups/
 ADD upsd.conf /etc/ups/
 ADD upsd.users /etc/ups/
 
-RUN mkdir -p /var/state/ups && \
-    chown nut /var/state/ups /etc/ups
+RUN chmod +x /start.sh \
+ && mkdir -p /var/state/ups \
+ && chown nut /var/state/ups /etc/ups
 
 EXPOSE 3493
 
