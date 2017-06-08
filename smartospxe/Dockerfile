@@ -11,7 +11,7 @@ RUN apk update && \
 ENV release=20170601T212107Z
 RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${release}/platform-${release}.tgz \
   | tar -C /www -zxvf - \
- && mv /www/platform-${release} /www/platform
+ && mv /www/platform-${release} /www/smartos/platform
 
 ADD nginx.conf /nginx.conf
 
