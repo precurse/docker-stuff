@@ -2,7 +2,7 @@ FROM precurse/alpine-armhf
 LABEL maintainer "andrewklaus@gmail.com"
 
 RUN apk update && \
-    apk add nginx=1.10.3-r0 && \
+    apk add nginx=1.12.0-r2 && \
     adduser -D -u 1000 -g 'www' www
 
 ENV release=20170601T212107Z
