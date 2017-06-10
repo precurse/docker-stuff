@@ -8,7 +8,7 @@ RUN apk update && \
  && adduser -D -u 1000 -g 'www' www \
  && mkdir -p /www/smartos
 
-ENV release=20170601T212107Z
+ENV release=20170608T172228Z
 RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${release}/platform-${release}.tgz \
   | tar -C /www -zxvf - \
  && mv /www/platform-${release} /www/smartos/platform
