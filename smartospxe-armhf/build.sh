@@ -3,7 +3,7 @@ set -ex
 # docker hub username
 USERNAME=precurse
 # image name
-IMAGE=tftpd-armhf
+IMAGE=smartospxe-armhf
 VERSION=`cat VERSION`
 
 docker build --build-arg VERSION=${VERSION} -t $USERNAME/$IMAGE:latest .
