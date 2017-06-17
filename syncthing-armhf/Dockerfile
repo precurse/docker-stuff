@@ -12,8 +12,8 @@ RUN apk update \
  && cd /syncthing \
  && curl -s -L https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-arm-v${VERSION}.tar.gz \
  | tar -zxf - \
- && mv syncthing-linux-arm-${VERSION}/syncthing /syncthing/syncthing \
- && rm -rf syncthing-linux-arm-${VERSION} \
+ && mv syncthing-linux-arm-v${VERSION}/syncthing /syncthing/syncthing \
+ && rm -rf syncthing-linux-arm-v${VERSION} \
  && apk del curl
 
 EXPOSE 22000
