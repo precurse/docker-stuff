@@ -10,7 +10,7 @@ RUN apk update \
  && apk add --no-cache curl \
  && mkdir /syncthing \
  && cd /syncthing \
- && curl -s -L https://github.com/syncthing/syncthing/releases/download/${VERSION}/syncthing-linux-arm-${VERSION}.tar.gz \
+ && curl -s -L https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-arm-v${VERSION}.tar.gz \
  | tar -zxf - \
  && mv syncthing-linux-arm-${VERSION}/syncthing /syncthing/syncthing \
  && rm -rf syncthing-linux-arm-${VERSION} \
