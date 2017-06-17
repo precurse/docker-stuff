@@ -1,4 +1,4 @@
-FROM precurse/alpine-armhf
+FROM precurse/alpine-armhf:3.6.2
 LABEL maintainer "andrewklaus@gmail.com"
 
 RUN apk update && \
@@ -8,10 +8,11 @@ RUN apk update && \
  && adduser -D -u 1000 -g 'www' www \
  && mkdir -p /www/smartos
 
-ENV release=20170608T172228Z
-RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${release}/platform-${release}.tgz \
+ARG VERSION=local
+ENV VERSION ${VERSION}
+RUN curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${VERSION}/platform-${VERSION}.tgz \
   | tar -C /www -zxvf - \
- && mv /www/platform-${release} /www/smartos/platform
+ && mv /www/platform-${VERSION} /www/smartos/platform
 
 ADD nginx.conf /nginx.conf
 
