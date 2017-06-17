@@ -1,4 +1,4 @@
-FROM precurse/alpine-armhf
+FROM precurse/alpine-armhf:3.6.2
 LABEL maintainer "andrewklaus@gmail.com"
 
 RUN apk update && \
