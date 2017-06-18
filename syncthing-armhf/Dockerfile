@@ -8,7 +8,7 @@ ENV VERSION=${VERSION}
 
 RUN apk update \
  && apk add --no-cache curl \
- && mkdir /syncthing \
+ && mkdir -p /syncthing /data \
  && cd /syncthing \
  && curl -s -L https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-arm-v${VERSION}.tar.gz \
  | tar -zxf - \
@@ -16,12 +16,17 @@ RUN apk update \
  && rm -rf syncthing-linux-arm-v${VERSION} \
  && apk del curl
 
-EXPOSE 22000
-EXPOSE 21027/udp
+EXPOSE 8384 22000 21027/udp
 
 USER syncthing
 
+# Create vols
+VOLUME /var/syncthing /data
+
 # Disable Syncthing auto-upgrade
 ENV STNOUPGRADE=1
+# Disable default folder
+ENV STNODEFAULTFOLDER=1
+
 ENTRYPOINT ["/syncthing/syncthing"]
-CMD ["-home", "/var/syncthing/config", "-gui-address", "0.0.0.0:8384"]
+CMD ["-home", "/var/syncthing/config", "-gui-address", "0.0.0.0:8384", "-no-browser"]
