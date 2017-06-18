@@ -9,6 +9,7 @@ ENV VERSION=${VERSION}
 RUN apk update \
  && apk add --no-cache curl \
  && mkdir -p /syncthing /data \
+ && chown -R syncthing:syncthing /var/syncthing /data \
  && cd /syncthing \
  && curl -s -L https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-arm-v${VERSION}.tar.gz \
  | tar -zxf - \
@@ -29,4 +30,4 @@ ENV STNOUPGRADE=1
 ENV STNODEFAULTFOLDER=1
 
 ENTRYPOINT ["/syncthing/syncthing"]
-CMD ["-home", "/var/syncthing/config", "-gui-address", "0.0.0.0:8384", "-no-browser"]
+CMD ["-home", "/var/syncthing", "-gui-address", "0.0.0.0:8384", "-no-browser"]

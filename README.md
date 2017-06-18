@@ -10,7 +10,7 @@ docker volume create --name syncthing-config
 
 docker volume create --name syncthing-data
 
-docker create -p 8384:8384 -p 22000:22000 -p 21027:21027/udp -v syncthing-config:/var/syncthing/config -v syncthing-data:/data --name syncthing -it precurse/syncthing-armhf
+docker create -p 8384:8384 -p 22000:22000 -p 21027:21027/udp -v syncthing-config:/var/syncthing -v syncthing-data:/data --name syncthing -it precurse/syncthing-armhf
 
 # Setup systemd to start containers on boot
 cp systemd/docker-container@.service /etc/systemd/system/docker-container@.service
