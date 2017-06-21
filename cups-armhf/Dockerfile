@@ -5,7 +5,7 @@ ARG VERSION=local
 ENV VERSION=${VERSION}
 
 RUN apk update && \
-    apk add --no-cache cups
+    apk add --no-cache cups>${VERSION}
 
 EXPOSE 631
 
