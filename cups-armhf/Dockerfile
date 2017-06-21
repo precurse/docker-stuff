@@ -23,7 +23,27 @@ RUN mkdir /cups \
  && curl -s -L https://github.com/apple/cups/releases/download/v${VERSION}/cups-${VERSION}-source.tar.gz \
  | tar -zxf - \
  && cd cups-${VERSION} \
- && ./configure && make && make install \
+ && ./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--with-logdir=/var/log/cups \
+		--with-docdir=/usr/share/cups \
+		--with-cups-user=lp \
+		--with-cups-group=lp \
+		--with-system-groups=lpadmin \
+		--without-php \
+		--disable-pam \
+		--disable-ldap \
+		--libdir=/usr/lib \
+		--enable-raw-printing \
+		--enable-dbus \
+		--with-dbusdir=/etc/dbus-1 \
+		--enable-libpaper \
+		--enable-ssl=yes \
+		--enable-gnutls \
+		--with-pdftops=pdftops \
+ && make && make install \
  && apk del curl
 
 EXPOSE 631
