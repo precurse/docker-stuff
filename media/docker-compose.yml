@@ -3,10 +3,11 @@ services:
   transmission:
     image: rlesouef/alpine-transmission
     env_file:
-      - .trans_env
+      - trans.env
     volumes:
       - /home/media/downloads:/transmission/downloads
       - /home/media/incomplete:/transmission/incomplete
+      - /home/media/movies:/transmission/movies
       - transmission_config:/etc/transmission-daemon
     ports:
       - "127.0.0.1:9091:9091"
@@ -15,7 +16,7 @@ services:
   plexmediaserver:
     image: plexinc/pms-docker
     env_file:
-      - .plex_env
+      - plex.env
     volumes:
       - /home/media/movies:/media/movies
       - /home/media/tv:/media/tv
