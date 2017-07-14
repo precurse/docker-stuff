@@ -1,0 +1,30 @@
+version: '3'
+services:
+  transmission:
+    image: rlesouef/alpine-transmission
+    env_file:
+      - .trans_env
+    volumes:
+      - /home/media/downloads:/transmission/downloads
+      - /home/media/incomplete:/transmission/incomplete
+      - transmission_config:/etc/transmission-daemon
+    ports:
+      - "127.0.0.1:9091:9091"
+      - "51413:51413/tcp"
+      - "51413:51413/udp" 
+  plexmediaserver:
+    image: plexinc/pms-docker
+    env_file:
+      - .plex_env
+    volumes:
+      - /home/media/movies:/media/movies
+      - /home/media/tv:/media/tv
+      - plex_config:/config
+    ports:
+      - "32400:32400"
+
+
+volumes:
+  transmission_config: {}
+  plex_config: {}
+
