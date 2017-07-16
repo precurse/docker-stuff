@@ -5,8 +5,7 @@ services:
     env_file:
       - trans.env
     volumes:
-      - /home/media/downloads:/downloads
-      - /home/media/movies:/movies
+      - /home/media/downloads:/media/downloads
       - /home/media/watch:/watch
       - transmission_config:/config
     ports:
@@ -25,8 +24,29 @@ services:
     ports:
       - "32400:32400"
 
+  sonarr:
+    image: linuxserver/sonarr
+    env_file:
+      - sonarr.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/media:/media
+      - sonarr_config:/config
+    ports:
+      - "127.0.0.1:8989:8989"
 
+  radarr:
+    image: linuxserver/radarr
+    env_file:
+      - radarr.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/media:/media
+      - radarr_config:/config
+    ports:
+      - "127.0.0.1:7878:7878"
 volumes:
   transmission_config: {}
   plex_config: {}
-
+  sonarr_config: {}
+  radarr_config: {}
