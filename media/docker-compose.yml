@@ -1,18 +1,19 @@
 version: '3'
 services:
   transmission:
-    image: rlesouef/alpine-transmission
+    image: linuxserver/transmission
     env_file:
       - trans.env
     volumes:
-      - /home/media/downloads:/transmission/downloads
-      - /home/media/incomplete:/transmission/incomplete
-      - /home/media/movies:/transmission/movies
-      - transmission_config:/etc/transmission-daemon
+      - /home/media/downloads:/downloads
+      - /home/media/movies:/movies
+      - /home/media/watch:/watch
+      - transmission_config:/config
     ports:
       - "127.0.0.1:9091:9091"
       - "51413:51413/tcp"
       - "51413:51413/udp" 
+
   plexmediaserver:
     image: plexinc/pms-docker
     env_file:
