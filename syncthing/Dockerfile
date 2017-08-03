@@ -24,8 +24,8 @@ USER syncthing
 # Create vols
 VOLUME /var/syncthing /data
 
-# Disable Syncthing auto-upgrade
-ENV STNOUPGRADE=1
+# Enable Syncthing auto-upgrade
+ENV STNOUPGRADE=0
 # Disable default folder
 ENV STNODEFAULTFOLDER=1
 
