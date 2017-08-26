@@ -14,6 +14,7 @@ RUN apk update \
  && curl -s -L https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-arm-v${VERSION}.tar.gz \
  | tar -zxf - \
  && mv syncthing-linux-arm-v${VERSION}/syncthing /syncthing/syncthing \
+ && chown -R syncthing /syncthing \
  && rm -rf syncthing-linux-arm-v${VERSION} \
  && apk del curl
 
@@ -26,6 +27,7 @@ VOLUME /var/syncthing /data
 
 # enable Syncthing auto-upgrade
 ENV STNOUPGRADE=0
+
 # Disable default folder
 ENV STNODEFAULTFOLDER=1
 
