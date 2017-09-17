@@ -3,7 +3,7 @@ LABEL maintainer "andrewklaus@gmail.com"
 
 RUN apk update && \
     apk add --no-cache \
-    nginx=1.12.0-r2 \
+    nginx \
     curl \
  && adduser -D -u 1000 -g 'www' www \
  && mkdir -p /www/smartos
