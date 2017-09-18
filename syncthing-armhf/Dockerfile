@@ -1,5 +1,6 @@
 FROM precurse/alpine-armhf:3.6.2
 LABEL maintainer "andrewklaus@gmail.com"
+ENV REFRESHED_AT 2017-09-18
 
 RUN adduser -D -h /var/syncthing -s /nologin syncthing
 
