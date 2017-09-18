@@ -2,8 +2,7 @@ FROM precurse/alpine-armhf:3.6.2
 LABEL maintainer "andrewklaus@gmail.com"
 ENV REFRESHED_AT 2017-09-18
 
-RUN apk update && \
-    apk add --no-cache \
+RUN apk add --no-cache \
     nginx \
     curl \
  && adduser -D -u 1000 -g 'www' www \

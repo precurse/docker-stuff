@@ -7,8 +7,7 @@ RUN adduser -D -h /var/syncthing -s /nologin syncthing
 ARG VERSION=local
 ENV VERSION=${VERSION}
 
-RUN apk update \
- && apk add --no-cache curl \
+RUN apk add --no-cache curl \
  && mkdir -p /syncthing /data \
  && chown -R syncthing:syncthing /var/syncthing /data \
  && cd /syncthing \
