@@ -59,20 +59,8 @@ services:
     ports:
       - "127.0.0.1:9000:9000"
 
-  syncthing:
-    restart: unless-stopped
-    image: precurse/syncthing
-    volumes:
-      - syncthing_config:/var/syncthing
-      - /home/piranha/syncthing:/data
-    ports:
-      - "127.0.0.1:8384:8384"
-      - "127.0.0.1:22000:22000"
-      - "127.0.0.1:21027:21027/udp"
-
 volumes:
   transmission_config: {}
   plex_config: {}
   sonarr_config: {}
   radarr_config: {}
-  syncthing_config: {}
