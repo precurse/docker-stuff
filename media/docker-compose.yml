@@ -2,7 +2,7 @@ version: '3'
 services:
   transmission:
     image: linuxserver/transmission
-    restart: always
+    restart: unless-stopped
     env_file:
       - trans.env
     volumes:
@@ -16,7 +16,7 @@ services:
 
   plexmediaserver:
     image: plexinc/pms-docker
-    restart: always
+    restart: unless-stopped
     env_file:
       - plex.env
     volumes:
@@ -28,7 +28,7 @@ services:
 
   sonarr:
     image: linuxserver/sonarr
-    restart: always
+    restart: unless-stopped
     env_file:
       - sonarr.env
     volumes:
@@ -40,7 +40,7 @@ services:
 
   radarr:
     image: linuxserver/radarr
-    restart: always
+    restart: unless-stopped
     env_file:
       - radarr.env
     volumes:
@@ -51,7 +51,7 @@ services:
       - "127.0.0.1:7878:7878"
 
   minio:
-    restart: always
+    restart: unless-stopped
     image: minio/minio
     entrypoint: /usr/bin/docker-entrypoint.sh minio server /data
     volumes:
@@ -60,7 +60,7 @@ services:
       - "127.0.0.1:9000:9000"
 
   syncthing:
-    restart: always
+    restart: unless-stopped
     image: precurse/syncthing
     volumes:
       - syncthing_config:/var/syncthing
