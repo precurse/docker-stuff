@@ -2,6 +2,7 @@ version: '3'
 services:
   transmission:
     image: linuxserver/transmission
+    restart: always
     env_file:
       - trans.env
     volumes:
@@ -11,10 +12,11 @@ services:
     ports:
       - "127.0.0.1:9091:9091"
       - "51413:51413/tcp"
-      - "51413:51413/udp" 
+      - "51413:51413/udp"
 
   plexmediaserver:
     image: plexinc/pms-docker
+    restart: always
     env_file:
       - plex.env
     volumes:
@@ -26,6 +28,7 @@ services:
 
   sonarr:
     image: linuxserver/sonarr
+    restart: always
     env_file:
       - sonarr.env
     volumes:
@@ -37,6 +40,7 @@ services:
 
   radarr:
     image: linuxserver/radarr
+    restart: always
     env_file:
       - radarr.env
     volumes:
@@ -45,8 +49,30 @@ services:
       - radarr_config:/config
     ports:
       - "127.0.0.1:7878:7878"
+
+  minio:
+    restart: always
+    image: minio/minio
+    entrypoint: /usr/bin/docker-entrypoint.sh minio server /data
+    volumes:
+      - /home/media:/data
+    ports:
+      - "127.0.0.1:9000:9000"
+
+  syncthing:
+    restart: always
+    image: precurse/syncthing
+    volumes:
+      - syncthing_config:/var/syncthing
+      - /home/piranha/syncthing:/data
+    ports:
+      - "127.0.0.1:8384:8384"
+      - "127.0.0.1:22000:22000"
+      - "127.0.0.1:21027:21027/udp"
+
 volumes:
   transmission_config: {}
   plex_config: {}
   sonarr_config: {}
   radarr_config: {}
+  syncthing_config: {}
