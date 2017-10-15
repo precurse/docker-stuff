@@ -1,0 +1,17 @@
+version: '3'
+services:
+  syncthing:
+    container_name: syncthing
+    restart: unless-stopped
+    image: precurse/syncthing
+    network_mode: "host"
+    volumes:
+      - syncthing_config:/var/syncthing
+      - /home/piranha/syncthing:/data
+    ports:
+      - "127.0.0.1:8384:8384"
+      - "22000:22000"
+      - "21027:21027/udp"
+
+volumes:
+  syncthing_config: {}
