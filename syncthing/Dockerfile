@@ -1,14 +1,14 @@
-FROM alpine:3.6
+ARG BASE_IMAGE=alpine:3.6
+FROM ${BASE_IMAGE}
+
 LABEL maintainer "andrewklaus@gmail.com"
 ENV REFRESHED_AT 2017-09-18
-
-ARG VERSION=local
-ENV VERSION=${VERSION}
-ENV ARCH=amd64
+ARG ARCH=amd64
 
 WORKDIR /
 
-RUN apk add --no-cache curl gnupg \
+ADD VERSION /VERSION
+RUN export VERSION=`cat /VERSION` && apk add --no-cache curl gnupg \
  && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-${ARCH}-v${VERSION}.tar.gz \
  && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/sha1sum.txt.asc \
  && grep syncthing-linux-${ARCH} sha1sum.txt.asc | sha1sum \
@@ -18,7 +18,7 @@ RUN apk add --no-cache curl gnupg \
  && mv syncthing-linux-${ARCH}-v${VERSION}/syncthing /syncthing
 
 
-FROM alpine:3.6
+FROM ${BASE_IMAGE}
 RUN apk --no-cache add ca-certificates
 WORKDIR /
 

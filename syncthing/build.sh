@@ -6,6 +6,6 @@ USERNAME=precurse
 IMAGE=syncthing
 VERSION=`cat VERSION`
 
-docker build --build-arg VERSION=${VERSION} -t $USERNAME/$IMAGE:latest .
+docker build -t $USERNAME/$IMAGE:latest .
 docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
 
