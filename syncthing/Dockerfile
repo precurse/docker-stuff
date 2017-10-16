@@ -4,17 +4,18 @@ ENV REFRESHED_AT 2017-09-18
 
 ARG VERSION=local
 ENV VERSION=${VERSION}
+ENV ARCH=amd64
 
 WORKDIR /
 
 RUN apk add --no-cache curl gnupg \
- && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-amd64-v${VERSION}.tar.gz \
+ && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-${ARCH}-v${VERSION}.tar.gz \
  && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/sha1sum.txt.asc \
- && grep syncthing-linux-amd64 sha1sum.txt.asc | sha1sum \
+ && grep syncthing-linux-${ARCH} sha1sum.txt.asc | sha1sum \
  && gpg --keyserver keyserver.ubuntu.com --recv-key D26E6ED000654A3E \
  && gpg --verify sha1sum.txt.asc \
- && tar -zxf syncthing-linux-amd64-v${VERSION}.tar.gz \
- && mv syncthing-linux-amd64-v${VERSION}/syncthing /syncthing
+ && tar -zxf syncthing-linux-${ARCH}-v${VERSION}.tar.gz \
+ && mv syncthing-linux-${ARCH}-v${VERSION}/syncthing /syncthing
 
 
 FROM alpine:3.6
