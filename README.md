@@ -11,13 +11,6 @@ docker create --restart unless-stopped -p 631:631/tcp --device=/dev/bus/usb/001/
 docker volume create --name syncthing-config
 docker volume create --name syncthing-data
 docker create --network=host --restart unless-stopped -p 8384:8384 -p 22000:22000 -p 21027:21027/udp -v syncthing-config:/var/syncthing -v syncthing-data:/data --name syncthing -it precurse/syncthing-armhf
-```
 
-# Setup systemd to start containers on boot
-```bash
-cp systemd/docker-container@.service /etc/systemd/system/docker-container@.service
-systemctl enable docker-container@tftpd.service
-systemctl enable docker-container@nut.service
-systemctl enable docker-container@smartospxe.service
-systemctl enable docker-container@syncthing.service
+docker-compose up -d --no-deps --build syncthing
 ```
