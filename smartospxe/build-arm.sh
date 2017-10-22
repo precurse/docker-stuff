@@ -3,9 +3,9 @@ set -ex
 # docker hub username
 USERNAME=precurse
 # image name
-IMAGE=smartospxe-armhf
+IMAGE=smartospxe
 VERSION=`cat VERSION`
+BASE_IMAGE="precurse/alpine-armhf:3.6.2"
 
-docker build --build-arg VERSION=${VERSION} -t $USERNAME/$IMAGE:latest .
+docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t $USERNAME/$IMAGE:latest .
 docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION
-
