@@ -1,4 +1,6 @@
-FROM precurse/alpine-armhf:3.6.2
+ARG BASE_IMAGE=alpine:3.6
+FROM ${BASE_IMAGE}
+
 LABEL maintainer "andrewklaus@gmail.com"
 ENV REFRESHED_AT 2017-09-18
 
