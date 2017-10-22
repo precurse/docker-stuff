@@ -6,7 +6,7 @@ USERNAME=precurse
 IMAGE=syncthing
 VERSION=`cat VERSION`
 
-if `uname -m | grep armv71`; then
+if `uname -m | grep armv7l`; then
   BASE_IMAGE="precurse/alpine-armhf:3.6.2"
   ARCH=arm
   docker build --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg ARCH=${ARCH} -t $USERNAME/$IMAGE:latest .
