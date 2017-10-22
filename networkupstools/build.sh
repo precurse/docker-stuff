@@ -3,7 +3,7 @@ set -ex
 # docker hub username
 USERNAME=precurse
 # image name
-IMAGE=nut-armhf
+IMAGE=networkupstools
 VERSION=`cat VERSION`
 
 docker build -t $USERNAME/$IMAGE:latest .

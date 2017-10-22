@@ -3,7 +3,7 @@ set -ex
 # docker hub username
 USERNAME=precurse
 # image name
-IMAGE=nut-armhf
+IMAGE=networkupstools
 VERSION=`cat VERSION`
 BASE_IMAGE="precurse/alpine-armhf:3.6.2"
 
