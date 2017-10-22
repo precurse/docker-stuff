@@ -3,7 +3,7 @@ set -ex
 # docker hub username
 USERNAME=precurse
 # image name
-IMAGE=syncthing-armhf
+IMAGE=syncthing
 VERSION=`cat VERSION`
 BASE_IMAGE="precurse/alpine-armhf:3.6.2"
 ARCH=arm
