@@ -1,7 +1,7 @@
 # Docker create commands
 ```bash
 docker create --restart unless-stopped -p 69:69/udp --name tftpd -it precurse/tftpd
-docker create --restart unless-stopped -p 3493:3493/tcp --device=/dev/bus/usb/001/004 --name networkupstools -it precurse/networkupstools
+docker create --restart unless-stopped -p 3493:3493/tcp --device=/dev/$(readlink /dev/cyberpower_ups) --name networkupstools -it precurse/networkupstools
 docker create --restart unless-stopped -p 80:80/tcp --name smartospxe -it precurse/smartospxe
 docker create --restart unless-stopped -p 631:631/tcp --device=/dev/bus/usb/001/005 --name cups -it precurse/cups
 ```
