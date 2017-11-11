@@ -27,7 +27,7 @@ RUN mkdir -p /syncthing /data \
   && chown -R syncthing:syncthing /var/syncthing /data \
   && chown syncthing /syncthing
 
-COPY --from=0 /syncthing .
+COPY --from=0 /syncthing /syncthing/syncthing
 
 EXPOSE 8384 22000 21027/udp
 
@@ -39,5 +39,5 @@ VOLUME /var/syncthing /data
 # Disable default folder
 ENV STNODEFAULTFOLDER=1
 
-ENTRYPOINT ["/syncthing"]
+ENTRYPOINT ["/syncthing/syncthing"]
 CMD ["-home", "/var/syncthing", "-gui-address", "0.0.0.0:8384", "-no-browser"]
