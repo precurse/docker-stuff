@@ -39,5 +39,8 @@ VOLUME /var/syncthing /data
 # Disable default folder
 ENV STNODEFAULTFOLDER=1
 
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD echo '' | telnet localhost:22000 || exit 1
+
 ENTRYPOINT ["/syncthing/syncthing"]
 CMD ["-home", "/var/syncthing", "-gui-address", "0.0.0.0:8384", "-no-browser"]
