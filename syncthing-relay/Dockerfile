@@ -36,7 +36,7 @@ USER syncthing-relay
 VOLUME /var/syncthing-relay
 
 HEALTHCHECK --interval=5m --timeout=3s \
-  CMD echo '' | telnet localhost:22067 || exit 1
+  CMD nc -z localhost 22067 || exit 1
 
 ENTRYPOINT ["/strelaysrv"]
 CMD ["-keys=/var/syncthing-relay","-global-rate=1048576","-provided-by=precurse-docker"]
