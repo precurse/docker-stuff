@@ -1,0 +1,14 @@
+version: '3'
+services:
+  syncthing:
+    container_name: syncthing-relay
+    restart: unless-stopped
+    image: precurse/syncthing-relay
+    volumes:
+      - syncthing-relay_config:/var/syncthing-relay
+    ports:
+      - "443:22067"
+      - "22070:22070"
+
+volumes:
+  syncthing-relay_config: {}
