@@ -39,4 +39,4 @@ HEALTHCHECK --interval=5m --timeout=3s \
   CMD echo '' | telnet localhost:22067 || exit 1
 
 ENTRYPOINT ["/strelaysrv"]
-CMD ["-keys", "/var/syncthing-relay"]
+CMD ["-keys=/var/syncthing-relay","-global-rate=1048576","-provided-by=precurse-docker"]
