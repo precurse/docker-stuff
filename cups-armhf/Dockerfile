@@ -1,4 +1,4 @@
-FROM precurse/alpine-armhf:3.6.2
+FROM precurse/alpine-armhf:latest
 LABEL maintainer "andrewklaus@gmail.com"
 
 ARG VERSION=local
