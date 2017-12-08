@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=alpine:3.6
+ARG BASE_IMAGE=alpine:3.7
 FROM ${BASE_IMAGE}
 
 LABEL maintainer "andrewklaus@gmail.com"

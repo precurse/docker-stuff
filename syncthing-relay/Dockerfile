@@ -18,7 +18,7 @@ WORKDIR /root/go/src/github.com/syncthing/syncthing
 
 RUN GOPATH=/root/go go run build.go
 
-FROM alpine:3.6
+FROM alpine:3.7
 RUN apk --no-cache add ca-certificates
 WORKDIR /
 
