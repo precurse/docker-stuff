@@ -14,5 +14,5 @@ docker run st-relay
 ```
 
 While creating the volume is optional, it ensures the generated keys will stay around when recreating containers. This is helpful
- when you hardcode the certificate on your syncthing clients like the documentation [shows]](https://docs.syncthing.net/users/relaying.html).
+ when you hardcode the certificate on your syncthing clients like the documentation [shows](https://docs.syncthing.net/users/relaying.html).
 
