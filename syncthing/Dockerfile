@@ -12,6 +12,8 @@ RUN export VERSION=`cat /VERSION` && apk add --no-cache curl gnupg \
  && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/syncthing-linux-${ARCH}-v${VERSION}.tar.gz \
  && curl -sLO https://github.com/syncthing/syncthing/releases/download/v${VERSION}/sha256sum.txt.asc \
  && grep syncthing-linux-${ARCH} sha256sum.txt.asc | sha256sum \
+ && mkdir ~/.gnupg \
+ && printf '%%Assuan%%\nsocket=/dev/shm/S.gpg-agent\n' > ~/.gnupg/S.gpg-agent \
  && gpg --keyserver keyserver.ubuntu.com --recv-key D26E6ED000654A3E \
  && gpg --verify sha256sum.txt.asc \
  && tar -zxf syncthing-linux-${ARCH}-v${VERSION}.tar.gz \
