@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 
 ADD VERSION /VERSION
 RUN export VERSION=`cat /VERSION` \
-  && curl -s -L http://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${VERSION}/platform-${VERSION}.tgz \
+  && curl -s -L https://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/${VERSION}/platform-${VERSION}.tgz \
   | tar -C /www -zxvf - \
  && mv /www/platform-${VERSION} /www/smartos/platform
 
