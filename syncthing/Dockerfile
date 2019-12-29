@@ -1,8 +1,8 @@
-ARG BASE_IMAGE=alpine:3.7
+ARG BASE_IMAGE=alpine:3.11
 FROM ${BASE_IMAGE}
 
 LABEL maintainer "andrewklaus@gmail.com"
-ENV REFRESHED_AT 2017-09-18
+ENV REFRESHED_AT 2019-12-28
 ARG ARCH=amd64
 
 WORKDIR /
