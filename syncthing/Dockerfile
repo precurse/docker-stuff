@@ -2,7 +2,7 @@ ARG BASE_IMAGE=alpine:3.11
 FROM ${BASE_IMAGE}
 
 LABEL maintainer "andrewklaus@gmail.com"
-ENV REFRESHED_AT 2019-12-28
+ENV REFRESHED_AT 2020-04-10
 ARG ARCH=amd64
 
 WORKDIR /
