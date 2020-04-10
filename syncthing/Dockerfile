@@ -45,4 +45,4 @@ HEALTHCHECK --interval=5m --timeout=3s \
   CMD nc -z localhost 22000 || exit 1
 
 ENTRYPOINT ["/syncthing/syncthing"]
-CMD ["-home", "/var/syncthing", "-gui-address", "0.0.0.0:8384", "-no-browser"]
+CMD ["-home", "/var/syncthing", "-gui-address", "127.0.0.1:8384", "-no-browser"]
