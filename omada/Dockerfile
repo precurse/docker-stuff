@@ -19,7 +19,7 @@ RUN apt update && \
     sed -i -e 's/JAVA_OPTS="-server/JAVA_OPTS="-client/g' bin/control.sh && \
     sed -i '/MAIN_CLASS=/a JSVC_OPTS="${JSVC_OPTS} -nodetach"' bin/control.sh && \
     sed -i 's/\${link_name} start$//' install.sh && \
-    yes | ./install.sh && \
+    yes y | /bin/bash install.sh && \
     rm -rf /tmp/* && \
     rm -rf /var/lib/apt/lists/*
 
