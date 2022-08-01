@@ -1,7 +1,10 @@
 #!/bin/sh
 IMAGE=syncthing
 USER=precurse
-sudo docker stop $IMAGE
-sudo docker rm $IMAGE
-sudo docker create --network=host --restart unless-stopped -p 8384:8384 -p 22000:22000 -p 21027:21027/udp -v syncthing-config:/var/syncthing -v ${HOME}/syncthing:/data --name $IMAGE -it $USER/$IMAGE
-sudo docker start $IMAGE
+alias docker=podman
+docker stop $IMAGE
+docker rm $IMAGE
+docker create --network=host --restart unless-stopped --security-opt label=disable --userns=keep-id -u 1000:1000 -v syncthing-config:/var/syncthing -v ${HOME}/syncthing:/data:Z --name $IMAGE -it $USER/$IMAGE
+podman generate  systemd --new --restart-policy=always syncthing > ~/.config/systemd/user/container-syncthing.service
+systemctl --user daemon-reload
+systemctl --user enable container-syncthing
